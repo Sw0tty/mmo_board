@@ -1,0 +1,65 @@
+{% extends 'flatpages/default.html' %}
+{% load static %}
+
+{% block title %}
+    Home page
+{% endblock title %}
+
+{% block content %}
+<link rel="stylesheet" type='text/css' href="{% static 'css/home-styles.css' %}">
+<style>
+    body {
+      background: url("/static/assets/news.jpg") no-repeat fixed;
+      background-size: cover;
+    }
+</style>
+<!--<div class="sticky"></div>-->
+<div class="title-cube">
+<!--    <h1>{{ request.user.is_authenticated }}</h1>-->
+    <h1>Добро пожаловать на новостной портал!</h1>
+</div>
+<!--<section>-->
+<!--    <div class="image-block">-->
+<!--    </div>-->
+<!--    <div class="">-->
+<!--        <h1>Добро пожаловать на новостной портал!</h1>-->
+<!--    </div>-->
+<!--</section>-->
+
+<div class="cube">
+    <h1>Доступные страницы</h1>
+    <ol>
+        <li>Advertisements - страница все объявлений</li>
+        <li>Random new - случайный пост</li>
+        <li>Search - поиск постов по параметрам</li>
+        <li>Create - создание постов</li>
+        <li>For users - страница пользователей</li>
+        <li>Categories - все достпуные категории</li>
+        <li>Admin - панель администратора</li>
+    </ol>
+</div>
+
+<div class="cube">
+    <h1>Что нового?</h1>
+    <h3>Добавлены страницы</h3>
+    <hr>
+    <p class="home-text">Categories - все доступные категории.</p>
+    <br>
+    <h3>Внесенные изменения</h3>
+    <hr>
+    <ol>
+        <li>Bar - добавлено поле для перехода к форме авторизации.</li>
+        <li>Все страницы с авторизацией, регистрацией, выхода из аккаунта переопределены для подключения стилей.</li>
+        <li>Переопределена страница ошибки 403</li>
+    </ol>
+    <br>
+    <h3>Краткое описание новых возможностей</h3>
+    <hr>
+    <ol>
+        <li>При переходе для авторизации можно либо
+        зарегистрироваться, либо войти через свой акаунт Google или GitHub.</li>
+        <li>Create - страница выбора опредленного типа поста. После выбора переносит на создание поста.</li>
+        <li>Кнопки редактирования - при нажатии открывают выбранный пост в режиме редактирования. Тамже можно удалить пост.</li>
+    </ol>
+</div>
+{% endblock content %}

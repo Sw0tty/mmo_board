@@ -20,7 +20,7 @@
         <nav style="z-index: 100; position: fixed; width: 100%;" class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
             <a class="logo" href="https://github.com/Sw0tty" title="Разработчик"></a>
            <div class="container">
-               <a class="navbar-brand" href="/">News Portal</a>
+               <a class="navbar-brand" href="/">MMO Portal</a>
                <button class="navbar-toggler" type="button" data-toggle="collapse"
                        data-target="#navbarResponsive"
                        aria-controls="navbarResponsive" aria-expanded="false"
@@ -30,17 +30,25 @@
                <div class="collapse navbar-collapse" id="navbarResponsive">
                    <ul class="navbar-nav ml-auto">
                        <li class="nav-item">
-                           <a class="nav-link" href="/news/">News</a>
+                           <a class="nav-link" href="/advertisements/">Advertisements</a>
                        </li>
                        <li class="nav-item">
-                           <a class="nav-link" href="/news/">Random new</a>
+                           <a class="nav-link" href="/advertisements/{% random_new_id %}">Random advertisement</a>
                        </li>
                        <li class="nav-item">
                            <a class="nav-link" href="/news/search/">Search</a>
                        </li>
-                       <li class="nav-item active">
-                           <a class="nav-link" href="/create/">Create</a>
-                       </li>
+                       {% if request.user.username %}
+                           <li class="nav-item">
+                               <div class="dropdown">
+                                  <div class="nav-link">Advertisement manager</div>
+                                  <div class="dropdown-content">
+                                    <a class="first-a_block" href="#">Own publications</a>
+                                    <a class="last-a_block" href="#">Create</a>
+                                  </div>
+                                </div>
+                           </li>
+                       {% endif %}
                        <li class="nav-item">
                            <a class="nav-link" href="/for-users/">For users</a>
                        </li>

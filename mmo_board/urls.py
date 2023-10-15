@@ -16,8 +16,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.contrib.auth.views import PasswordChangeView
+
+from account.views import ProfileView
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('advertisements/', include('board.urls'))
+    path('advertisements/', include('board.urls')),
+    path('accounts/', include('allauth.urls')),
+    path('accounts/profile/', ProfileView.as_view()),
+    path('accounts/profile/password_change/', PasswordChangeView.as_view(
+        template_name='change-password.html',
+        success_url='/accounts/profile/'
+    ), name='password_change'),
 ]

@@ -9,25 +9,19 @@ class Advertisement(models.Model):
     description = models.TextField()
     category = models.CharField(max_length=255, choices=advertisement_type)
     datetime_in = models.DateTimeField(auto_now_add=True)
-    author_id = models.ForeignKey('Author', on_delete=models.CASCADE, related_name='author')
-    responses_id = models.ManyToManyField('ResponseModel', through='AdvertisementResponses')
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    # responses_id = models.ManyToManyField('ResponseModel', through='AdvertisementResponses')
 
     def __str__(self):
         return self.title
 
 
-class Author(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='author')
-
-    def __str__(self):
-        return self.user.username
-
-
-class AdvertisementResponses(models.Model):
-    advertisement_id = models.ForeignKey('Advertisement', on_delete=models.CASCADE)
-    responses_id = models.ForeignKey('ResponseModel', on_delete=models.CASCADE)
+# class AdvertisementResponses(models.Model):
+#     advertisement_id = models.ForeignKey('Advertisement', on_delete=models.CASCADE)
+#     responses_id = models.ForeignKey('ResponseModel', on_delete=models.CASCADE)
 
 
 class ResponseModel(models.Model):
     description = models.TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+    advertisement_id = models.ForeignKey('Advertisement', on_delete=models.CASCADE)

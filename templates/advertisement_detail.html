@@ -1,0 +1,33 @@
+{% extends 'flatpages/default.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block title %}
+Объявление
+{% endblock title %}
+
+{% block content %}
+<link rel="stylesheet" type='text/css' href="{% static 'css/news-styles.css' %}">
+
+
+<h1>Одно из объявлений</h1>
+<hr>
+<div class="table-cube">
+	<table>
+		<tr class="table-head">
+			<th>Заголовок</th>
+			<th class="date-time-collumn">Дата публикации</th>
+			<th>Категория</th>
+			<th>Содержание</th>
+			<th style="width: 10%;">Изменить</th>
+		</tr>
+		<tr>
+			<td>{{ advertisement.title }}</td>
+            <td>{{ advertisement.description }}</td>
+			<td>{{ advertisement.category }}</td>
+            <td>{{ advertisement.datetime_in|date:'d.m.Y' }}</td>
+            <td>{{ advertisement.author }}</td>
+		</tr>
+	</table>
+</div>
+{% endblock content %}
