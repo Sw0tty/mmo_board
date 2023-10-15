@@ -8,6 +8,7 @@ class Advertisement(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
     category = models.CharField(max_length=255, choices=advertisement_type)
+    datetime_in = models.DateTimeField(auto_now_add=True)
     author_id = models.ForeignKey('Author', on_delete=models.CASCADE, related_name='author')
     responses_id = models.ManyToManyField('ResponseModel', through='AdvertisementResponses')
 
@@ -29,4 +30,4 @@ class AdvertisementResponses(models.Model):
 
 class ResponseModel(models.Model):
     description = models.TextField()
-    author_id = models.ForeignKey('Author', on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
