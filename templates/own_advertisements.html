@@ -3,59 +3,38 @@
 
 
 {% block title %}
-Объявления
+Мои объявления
 {% endblock title %}
 
 {% block content %}
 <link rel="stylesheet" type='text/css' href="{% static 'css/advertisement-style.css' %}">
 
-<h1>Все объявления</h1>
+<h1>Ваши объявления</h1>
 <hr>
-{% if advertisements %}
-
-
-{% for i in advertisements %}
-<div class="advertisement-cube">
-    <h3>{{ i.title }}</h3>
-    <hr>
-    <div class="content">
-        <label>{{ i.description }}</label>
-    </div>
-    
-    <div class="post-info">
-        <label>Автор: {{ i.author }}</label>
-        <label>Тема: {{ i.get_category_display }}</label>
-        <label>Дата публикации: {{ i.datetime_in|date:'d.m.Y' }}</label>
-    </div>
-</div>
-{% endfor %}
-
-
+{% if own_advertisements %}
 <div class="table-cube">
 	<table>
 		<tr class="table-head">
 			<th>Заголовок</th>
-			<th style="width: 15%;">Дата публикации</th>
-			<th>Категория</th>
-			<th>Содержание</th>
-			<th style="width: 10%;">Изменить</th>
+            <th>Содержание</th>
+            <th>Категория</th>
+			<th style="width: 15%;">Дата публикации</th>		
 		</tr>
-		{% for i in advertisements %}
+		{% for i in own_advertisements %}
 		<tr>
 			<td>{{ i.title }}</td>
             <td>{{ i.description }}</td>
 			<td>{{ i.get_category_display }}</td>
             <td>{{ i.datetime_in|date:'d.m.Y' }}</td>
-            <td>{{ i.author_id|truncatechars:20 }}</td>
 		</tr>
 		{% endfor %}
 	</table>
 </div>
 {% else %}
-	<h2>Новостной портал пуст!</h2>
+	<h2>У вас пока нет объявлений</h2>
 {% endif %}
 
-<!-- {% if page_obj.has_previous %}
+{% if page_obj.has_previous %}
        <a href="?page=1">1</a>
        {% if page_obj.previous_page_number != 1 %}
            ...
@@ -71,4 +50,4 @@
        {% endif %}
    {% endif %}
 
-{% endblock content %} -->
+{% endblock content %}

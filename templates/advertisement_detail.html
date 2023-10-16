@@ -7,7 +7,7 @@
 {% endblock title %}
 
 {% block content %}
-<link rel="stylesheet" type='text/css' href="{% static 'css/news-styles.css' %}">
+<link rel="stylesheet" type='text/css' href="{% static 'css/advertisement-style.css' %}">
 
 
 <h1>Одно из объявлений</h1>
@@ -16,10 +16,10 @@
 	<table>
 		<tr class="table-head">
 			<th>Заголовок</th>
-			<th class="date-time-collumn">Дата публикации</th>
-			<th>Категория</th>
-			<th>Содержание</th>
-			<th style="width: 10%;">Изменить</th>
+            <th>Содержание</th>
+            <th>Категория</th>
+			<th style="width: 15%;">Дата публикации</th>		
+			<th style="width: 10%;">Автор</th>
 		</tr>
 		<tr>
 			<td>{{ advertisement.title }}</td>
