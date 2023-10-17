@@ -6,6 +6,11 @@ h1 {
     text-shadow: -2px 3px 3px black;
 }
 
+h2 {
+  color: antiquewhite;
+  text-shadow: -2px 2px 3px black;
+}
+
 h3 {
     font-family: fantasy;
     text-align: left;

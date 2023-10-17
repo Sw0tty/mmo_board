@@ -63,3 +63,10 @@ class ReplyCreate(LoginRequiredMixin, CreateView):
     model = Reply
     form_class = CreatingReplyForm
     template_name = 'advertisement_create.html'
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.author = self.request.user
+        # self.object.advertisement_id = Advertisement.objects.get(id)
+        return super().form_valid(form)
+    

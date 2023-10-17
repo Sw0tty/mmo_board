@@ -6,7 +6,7 @@ from django import forms
 from django.core.files.base import File
 from django.db.models.base import Model
 from django.forms.utils import ErrorList
-from board.models import Advertisement
+from board.models import Advertisement, Reply
 
 
 class BasicSignupForm(SignupForm):
@@ -25,8 +25,7 @@ class CreatingAdvertisementForm(forms.ModelForm):
         self.fields['title'].label = 'Наименование'
         self.fields['description'].label = 'Описание'
         self.fields['category'].label = 'Категория'
-        self.fields['category'].empty_label = 'Выберите категорию'
-    
+
     class Meta:
         model = Advertisement
 
@@ -64,8 +63,9 @@ class CreatingReplyForm(forms.ModelForm):
         self.fields['description'].label = 'Описание'
     
     class Meta:
-        model = Advertisement
+        model = Reply
 
         fields = [
             'description',
         ]
+        
