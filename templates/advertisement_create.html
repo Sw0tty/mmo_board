@@ -14,14 +14,11 @@ Article create
 <link rel="stylesheet" type='text/css' href="{% static 'css/edit-styles.css' %}">
 
 
-{% if 'edit' in request.path and object.type == 'NE' %}
-    <h1>Редактирование новости</h1>
-{% elif 'edit' in request.path and object.type == 'AR' %}
-    <h1>Редактирование статьи</h1>
-{% elif 'create' in request.path and 'news' in request.path %}
-    <h1>Создание новости</h1>
-{% elif 'create' in request.path and 'articles' in request.path %}
-    <h1>Создание статьи</h1>
+
+{% if 'edit' in request.path %}
+    <h1>Редактирование объявления</h1>
+{% elif 'create' in request.path %}
+    <h1>Создание объявления</h1>
 {% endif %}
 
 <hr>
@@ -30,9 +27,13 @@ Article create
         {% csrf_token %}
         {% for i in form %}
             <div class="filter-block">
-                <p class="label">{{ i.label }}</p>
-                <hr>
-                <p class="filter-field">{{ i }}</p>
+                <div class="info-block">
+                    <p class="label">{{ i.label }}</p>
+                    <hr>
+                    <p class="filter-field">{{ i }}</p>
+                </div>
+                
+                
             </div>
             {% endfor %}
         <input type="submit" value="Опубликовать">
@@ -43,7 +44,7 @@ Article create
     <div class="danger-zone">
         <h2>Danger Zone!</h2>
         <hr>
-        <a href="delete/"><input type="submit" value="Удалить пост"></a>
+        <a href="delete/"><input type="submit" value="Удалить объявление"></a>
     </div>
 {% endif %}
 

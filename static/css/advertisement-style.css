@@ -2,6 +2,8 @@ h1 {
     font-style: italic;
     font-family: fantasy;
     font-size: 3em;
+    color: antiquewhite;
+    text-shadow: -2px 3px 3px black;
 }
 
 h3 {
@@ -67,4 +69,66 @@ table tr th:last-child {
 
 hr {
   margin: 0;
+}
+
+.cube {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 20px;
+  position: relative;
+  width: 100%;
+  background: transparent;
+  border-radius: 20px;
+  display: flow-root;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  backdrop-filter: blur(30px);
+}
+
+.post-info {
+  display: flex;
+  align-items: center;
+}
+
+.main-info-block, .info-block, .editbutton {
+  background-color: gainsboro;
+  padding: 5px 10px 5px 10px;
+  box-shadow: -5px 5px 5px 0px rgba(0,0,0,0.2);
+  border: 1px solid black;
+}
+
+.main-info-block {
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.info-block {
+  border-radius: 50px;
+  margin-right: 15px; 
+}
+
+.button-click {
+  margin-left: auto;
+}
+
+.button-alter, input[type='submit'] {
+  border-radius: 12px;
+  margin-left: auto;
+  text-align: center;
+  padding: 2px 8px 2px 8px;
+  text-decoration: none;
+  border: 2px solid white;
+  transition: 0.4s;
+  color: white;
+  background: bottom;
+}
+
+.button-alter:hover, input[type='submit']:hover {
+  background-color: antiquewhite;
+  color: black;
+}
+
+.grad-block {
+  box-shadow: -5px 5px 5px 0px rgba(255, 255, 255, 0.2);
 }

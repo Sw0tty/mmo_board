@@ -9,53 +9,47 @@
 {% block content %}
 <link rel="stylesheet" type='text/css' href="{% static 'css/advertisement-style.css' %}">
 
+
 <h1>Все объявления</h1>
 <hr>
-{% if advertisements %}
+{% if not advertisements %}
+<h2>Пока на портале пусто!</h2>
+
+
+{% else %}
 
 
 {% for i in advertisements %}
-<div class="advertisement-cube">
-    <h3>{{ i.title }}</h3>
-    <hr>
-    <div class="content">
-        <label>{{ i.description }}</label>
+<div class="cube">
+    <div class="main-info-block">
+        <h3>{{ i.title }}</h3>
+        <hr>
+        <div class="content">
+            <label>{{ i.description }}</label>
+        </div>
     </div>
-    
     <div class="post-info">
-        <label>Автор: {{ i.author }}</label>
-        <label>Тема: {{ i.get_category_display }}</label>
-        <label>Дата публикации: {{ i.datetime_in|date:'d.m.Y' }}</label>
+        <div class="info-block">
+            <label>Автор: {{ i.author }}</label>
+        </div>
+        <div class="info-block">
+            <label>Тема: {{ i.get_category_display }}</label>
+        </div>
+        <div class="info-block">
+            <label>Дата публикации: {{ i.datetime_in|date:'d.m.Y' }}</label>
+        </div>
+        {% if request.user != i.author  %}
+            <a class="button-click" href="/advertisements/{{ i.id }}/reply/">
+                <input class="responce-button" type="submit" value="Оставить отзыв">
+            </a>
+        {% endif %}
     </div>
 </div>
+
 {% endfor %}
-
-
-<div class="table-cube">
-	<table>
-		<tr class="table-head">
-			<th>Заголовок</th>
-			<th style="width: 15%;">Дата публикации</th>
-			<th>Категория</th>
-			<th>Содержание</th>
-			<th style="width: 10%;">Изменить</th>
-		</tr>
-		{% for i in advertisements %}
-		<tr>
-			<td>{{ i.title }}</td>
-            <td>{{ i.description }}</td>
-			<td>{{ i.get_category_display }}</td>
-            <td>{{ i.datetime_in|date:'d.m.Y' }}</td>
-            <td>{{ i.author_id|truncatechars:20 }}</td>
-		</tr>
-		{% endfor %}
-	</table>
-</div>
-{% else %}
-	<h2>Новостной портал пуст!</h2>
 {% endif %}
 
-<!-- {% if page_obj.has_previous %}
+{% if page_obj.has_previous %}
        <a href="?page=1">1</a>
        {% if page_obj.previous_page_number != 1 %}
            ...
@@ -71,4 +65,4 @@
        {% endif %}
    {% endif %}
 
-{% endblock content %} -->
+{% endblock content %}

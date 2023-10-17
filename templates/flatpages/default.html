@@ -32,11 +32,8 @@
                        <li class="nav-item">
                            <a class="nav-link" href="/advertisements/">Advertisements</a>
                        </li>
-                       <li class="nav-item">
-                           <a class="nav-link" href="/advertisements/{% random_new_id %}">Random advertisement</a>
-                       </li>
-                       <li class="nav-item">
-                           <a class="nav-link" href="/news/search/">Search</a>
+                       <li class="nav-item">   
+                            <a class="nav-link" href="/advertisements/{% random_advertisement_id %}">Random advertisement</a>                               
                        </li>
                        {% if request.user.username %}
                            <li class="nav-item">
@@ -49,12 +46,6 @@
                                 </div>
                            </li>
                        {% endif %}
-                       <li class="nav-item">
-                           <a class="nav-link" href="/for-users/">For users</a>
-                       </li>
-                       <li class="nav-item">
-                           <a class="nav-link" href="/categories/">Categories</a>
-                       </li>
                        <li class="nav-item">
                            <a class="nav-link" href="/admin/">Admin</a>
                        </li>

@@ -12,7 +12,7 @@
 
 <h1>Одно из объявлений</h1>
 <hr>
-<div class="table-cube">
+<!-- <div class="table-cube">
 	<table>
 		<tr class="table-head">
 			<th>Заголовок</th>
@@ -29,5 +29,32 @@
             <td>{{ advertisement.author }}</td>
 		</tr>
 	</table>
+</div> -->
+
+
+<div class="cube">
+    <div class="main-info-block">
+        <h3>{{ advertisement.title }}</h3>
+        <hr>
+        <div class="content">
+            <label>{{ advertisement.description }}</label>
+        </div>
+    </div>
+    <div class="post-info">
+        <div class="info-block">
+            <label>Автор: {{ advertisement.author }}</label>
+        </div>
+        <div class="info-block">
+            <label>Тема: {{ advertisement.get_category_display }}</label>
+        </div>
+        <div class="info-block">
+            <label>Дата публикации: {{ advertisement.datetime_in|date:'d.m.Y' }}</label>
+        </div>
+        {% if request.user != advertisement.author  %}
+            <a class="button-click" href="/advertisements/{{ i.id }}/reply/">
+                <input class="responce-button" type="submit" value="Оставить отзыв">
+            </a>
+        {% endif %}
+    </div>
 </div>
 {% endblock content %}

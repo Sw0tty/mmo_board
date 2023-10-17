@@ -25,8 +25,7 @@ class CreatingAdvertisementForm(forms.ModelForm):
         self.fields['title'].label = 'Наименование'
         self.fields['description'].label = 'Описание'
         self.fields['category'].label = 'Категория'
-        # self.fields['author'].label = 'Автор'
-        # self.fields['author'].disabled = True
+        self.fields['category'].empty_label = 'Выберите категорию'
     
     class Meta:
         model = Advertisement
@@ -35,5 +34,38 @@ class CreatingAdvertisementForm(forms.ModelForm):
             'title',
             'description',
             'category',
-            # 'author',
+        ]
+
+
+class AdvertisementForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__(*args, **kwargs)
+        self.fields['title'].label = 'Наименование'
+        self.fields['description'].label = 'Описание'
+        self.fields['category'].label = 'Категория'
+        self.fields['author'].label = 'Автор'
+        self.fields['author'].disabled = True
+
+    class Meta:
+        model = Advertisement
+
+        fields = [
+            'title',
+            'description',
+            'category',
+            'author'
+        ]
+
+
+class CreatingReplyForm(forms.ModelForm):
+    
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__(*args, **kwargs)
+        self.fields['description'].label = 'Описание'
+    
+    class Meta:
+        model = Advertisement
+
+        fields = [
+            'description',
         ]

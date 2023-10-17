@@ -11,25 +11,44 @@
 
 <h1>Ваши объявления</h1>
 <hr>
+
+
 {% if own_advertisements %}
-<div class="table-cube">
-	<table>
-		<tr class="table-head">
-			<th>Заголовок</th>
-            <th>Содержание</th>
-            <th>Категория</th>
-			<th style="width: 15%;">Дата публикации</th>		
-		</tr>
-		{% for i in own_advertisements %}
-		<tr>
-			<td>{{ i.title }}</td>
-            <td>{{ i.description }}</td>
-			<td>{{ i.get_category_display }}</td>
-            <td>{{ i.datetime_in|date:'d.m.Y' }}</td>
-		</tr>
-		{% endfor %}
-	</table>
+{% for i in own_advertisements %}
+<div class="cube">
+    <div class="main-info-block">
+        <h3>{{ i.title }}</h3>
+        <hr>
+        <div class="content">
+            <label>{{ i.description }}</label>
+        </div>
+    </div>
+    <div class="post-info">
+        <div class="info-block">
+            <label>Автор:&nbsp{{ i.author }}</label>
+        </div>
+        <div class="info-block">
+            <label>Тема:&nbsp{{ i.get_category_display }}</label>
+        </div>
+        <div class="info-block">
+            <label>Дата публикации:&nbsp{{ i.datetime_in|date:'d.m.Y' }}</label>
+        </div>
+
+
+        
+
+
+        <a class="button-click" href="/advertisements/{{ i.id }}/edit/">
+            <input class="button-alter" type="submit" value="Редактировать">
+        </a>
+    </div>
 </div>
+{% endfor %}
+
+
+
+
+
 {% else %}
 	<h2>У вас пока нет объявлений</h2>
 {% endif %}

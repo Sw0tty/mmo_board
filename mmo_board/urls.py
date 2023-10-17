@@ -19,9 +19,10 @@ from django.urls import path, include
 from django.contrib.auth.views import PasswordChangeView
 
 from account.views import ProfileView
-
+from board.views import home_page
 
 urlpatterns = [
+    path('', home_page),
     path('admin/', admin.site.urls),
     path('advertisements/', include('board.urls')),
     path('accounts/', include('allauth.urls')),

@@ -1,10 +1,11 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView
-from board.models import Advertisement
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
+from board.models import Advertisement, Reply
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 
-from board.forms import CreatingAdvertisementForm
+from board.forms import CreatingAdvertisementForm, CreatingReplyForm, AdvertisementForm
 
 
 class AdvertisementsList(ListView):
@@ -32,10 +33,33 @@ class AdvertisementCreate(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
+class AdvertisementUpdate(LoginRequiredMixin, UpdateView):
+    form_class = AdvertisementForm
+    model = Advertisement
+    
+    template_name = 'advertisement_create.html'
+
+
+class AdvertisementDelete(DeleteView):
+    model = Advertisement
+    template_name = 'advertisement_delete_page.html'
+    success_url = reverse_lazy('advertisement_list')
+
+
+def home_page(request):
+    return render(request, "home.html")
+
+
 @login_required
-def OwnAdvertisementsList(request):
+def own_advertisements_list(request):
     own_advertisements = Advertisement.objects.filter(author=request.user)
     context = {
-        "own_advertisements": own_advertisements,
+            "own_advertisements": own_advertisements,
         }
     return render(request, "own_advertisements.html", context)
+
+
+class ReplyCreate(LoginRequiredMixin, CreateView):
+    model = Reply
+    form_class = CreatingReplyForm
+    template_name = 'advertisement_create.html'
