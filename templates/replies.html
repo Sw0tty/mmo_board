@@ -1,0 +1,44 @@
+{% extends 'flatpages/default.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block title %}
+Отзывы на объявление
+{% endblock title %}
+
+{% block content %}
+<link rel="stylesheet" type='text/css' href="{% static 'css/advertisement-style.css' %}">
+
+<h1>Отзывы на объявление: {{ advertisement.title }}</h1>
+<hr>
+
+{% if replies %}
+    <div class="cube">
+        <div class="main-info-block">
+            {% for reply in replies %}
+            
+                <div class="reply-block">
+                    <h5>{{ reply.author }}</h5>
+                    <hr>
+                    <p class="reply-label">{{ reply.description }}</p>
+                </div>
+
+            
+            <a href="/advertisements/reply/accept/{{ reply.id }}/">
+                <input  class="responce-button" type="submit" value="Принять">
+            </a>
+
+
+
+
+            <a href="/advertisements/reply/reject/{{ reply.id }}/">
+                <input  class="responce-button" type="submit" value="Отклонить">
+            </a>
+                
+            {% endfor %}
+        </div>
+    </div>
+{% else %}
+    <h2>Необработанных отзывов нет.</h2>
+{% endif %}
+{% endblock content %}

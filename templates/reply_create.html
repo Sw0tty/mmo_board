@@ -1,0 +1,50 @@
+{% extends 'flatpages/default.html' %}
+{% load static %}
+
+{% block title %}
+{% if 'news' in request.path %}
+New create
+{% elif 'articles' in request.path %}
+Article create
+{% endif %}
+{% endblock title %}
+
+
+{% block content %}
+<link rel="stylesheet" type='text/css' href="{% static 'css/edit-styles.css' %}">
+
+
+
+{% if 'edit' in request.path %}
+    <h1>Редактирование объявления</h1>
+{% elif 'create' in request.path %}
+    <h1>Создание объявления</h1>
+{% endif %}
+
+
+<hr>
+<section>
+    <form action="{% url 'reply_added' %}" method="post">
+        {% csrf_token %}
+        {% for i in form %}
+            <div class="filter-block">
+                <div class="info-block">
+                    <p class="label">{{ i.label }}</p>
+                    <hr>
+                    <p class="filter-field">{{ i }}</p>
+                </div>              
+            </div>
+            {% endfor %}
+        <input class="responce-button" type="submit" value="Опубликовать">
+    </form>
+</section>
+
+{% if 'edit' in request.path %}
+    <div class="danger-zone">
+        <h2>Danger Zone!</h2>
+        <hr>
+        <a href="delete/"><input type="submit" value="Удалить объявление"></a>
+    </div>
+{% endif %}
+
+{% endblock content %}

@@ -34,10 +34,10 @@
                 <label>Дата публикации:&nbsp{{ i.datetime_in|date:'d.m.Y' }}</label>
             </div>
             <div class="info-block">
-                <label>Отзывы: {{ i.id|get_replies_count:False }}</label>
+                <label>Отзывы: {{ i.id|get_replies_count }}</label>
             </div>
             {% if i.id|get_no_adopted_replies_count %}
-                <a class="button-click" href="/">             
+                <a class="button-click" href="{{ i.id }}">             
                     <input class="button-alter" type="submit" value="Обработать отзывы">
                 </a>
             {% endif %}

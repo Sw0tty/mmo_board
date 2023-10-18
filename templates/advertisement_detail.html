@@ -9,28 +9,8 @@
 {% block content %}
 <link rel="stylesheet" type='text/css' href="{% static 'css/advertisement-style.css' %}">
 
-
 <h1>Одно из объявлений</h1>
 <hr>
-<!-- <div class="table-cube">
-	<table>
-		<tr class="table-head">
-			<th>Заголовок</th>
-            <th>Содержание</th>
-            <th>Категория</th>
-			<th style="width: 15%;">Дата публикации</th>		
-			<th style="width: 10%;">Автор</th>
-		</tr>
-		<tr>
-			<td>{{ advertisement.title }}</td>
-            <td>{{ advertisement.description }}</td>
-			<td>{{ advertisement.category }}</td>
-            <td>{{ advertisement.datetime_in|date:'d.m.Y' }}</td>
-            <td>{{ advertisement.author }}</td>
-		</tr>
-	</table>
-</div> -->
-
 
 <div class="cube">
     <div class="main-info-block">
@@ -42,7 +22,7 @@
         <h3>Отзывы</h3>
         <hr>
         {% for reply in replies %}
-            {% if reply.adopted == true %}
+            {% if reply.adopted == True %}
                 <div class="reply-block">
                     <h5>{{ reply.author }}</h5>
                     <hr>
@@ -50,7 +30,7 @@
                 </div>
             {% endif %}
         {% empty %}
-            <label>Отзывов пока что нет. Стань первым!</label>
+            <h2>Отзывов пока что нет. Стань первым!</h2>
         {% endfor %}
     </div>
     <div class="post-info">

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
 from board.models import Advertisement, Reply
@@ -55,7 +55,7 @@ def home_page(request):
     return render(request, "home.html")
 
 
-def reply_added_page(request, *callback_args, **callback_kwargs):
+def reply_added_page(request):
     return render(request, "reply_added.html")
 
 
@@ -81,4 +81,31 @@ class ReplyCreate(LoginRequiredMixin, CreateView):
         if self.object.author == reply_advertisement_id.author:
             return render(self.request, "404.html")
         return super().form_valid(form)
-    
+
+
+class Replies(DetailView):
+    model = Advertisement
+    template_name = 'replies.html'
+    context_object_name = 'advertisement'
+
+    def get_context_data(self,*args, **kwargs):
+        context = super(Replies, self).get_context_data(*args,**kwargs)
+        context['replies'] = Reply.objects.filter(advertisement_id__id=context['advertisement'].id, adopted=False)
+        return context
+
+
+@login_required
+def accept_reply(request, *callback_args, **callback_kwargs):
+    request.path = request.path[:-1]
+    reply = Reply.objects.get(id=request.path[request.path.rfind('/') + 1:])
+    reply.adopted = True
+    reply.save()
+    return redirect(f'/advertisements/own/{reply.advertisement_id.id}/')
+
+
+@login_required
+def reject_reply(request, *callback_args, **callback_kwargs):
+    request.path = request.path[:-1]
+    reply = Reply.objects.get(id=request.path[request.path.rfind('/') + 1:])
+    reply.delete()
+    return redirect(f'/advertisements/own/{reply.advertisement_id.id}/')
