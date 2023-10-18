@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>Ошибка запроса</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/errors.css' %}">
+    </head>
+    <body>
+        <section>
+            <div>
+                <div class="main">
+                    <div class="error-image"></div>
+                    <div class="in-main">
+                        <h1>404</h1>
+                        <br>
+                        <label>Что-то пошло не так</label>
+                    </div>
+                </div>
+                <div class="buttons-block">
+                    <a class="button" href="/">На домашнюю</a>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>

@@ -21,6 +21,11 @@ class AdvertisementDetail(DetailView):
     template_name = 'advertisement_detail.html'
     context_object_name = 'advertisement'
 
+    def get_context_data(self,*args, **kwargs):
+        context = super(AdvertisementDetail, self).get_context_data(*args,**kwargs)
+        context['replies'] = Reply.objects.filter(advertisement_id__id=context['advertisement'].id)
+        return context
+
 
 class AdvertisementCreate(LoginRequiredMixin, CreateView):
     model = Advertisement
@@ -50,6 +55,10 @@ def home_page(request):
     return render(request, "home.html")
 
 
+def reply_added_page(request, *callback_args, **callback_kwargs):
+    return render(request, "reply_added.html")
+
+
 @login_required
 def own_advertisements_list(request):
     own_advertisements = Advertisement.objects.filter(author=request.user)
@@ -65,8 +74,11 @@ class ReplyCreate(LoginRequiredMixin, CreateView):
     template_name = 'advertisement_create.html'
 
     def form_valid(self, form):
+        reply_advertisement_id = Advertisement.objects.get(id=self.request.path[self.request.path.rfind('s') + 2])
         self.object = form.save(commit=False)
         self.object.author = self.request.user
-        # self.object.advertisement_id = Advertisement.objects.get(id)
+        self.object.advertisement_id = reply_advertisement_id
+        if self.object.author == reply_advertisement_id.author:
+            return render(self.request, "404.html")
         return super().form_valid(form)
     

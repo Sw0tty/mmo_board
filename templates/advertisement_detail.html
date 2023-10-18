@@ -39,6 +39,19 @@
         <div class="content">
             <label>{{ advertisement.description }}</label>
         </div>
+        <h3>Отзывы</h3>
+        <hr>
+        {% for reply in replies %}
+            {% if reply.adopted == true %}
+                <div class="reply-block">
+                    <h5>{{ reply.author }}</h5>
+                    <hr>
+                    <p class="reply-label">{{ reply.description }}</p>
+                </div>
+            {% endif %}
+        {% empty %}
+            <label>Отзывов пока что нет. Стань первым!</label>
+        {% endfor %}
     </div>
     <div class="post-info">
         <div class="info-block">
@@ -51,10 +64,11 @@
             <label>Дата публикации: {{ advertisement.datetime_in|date:'d.m.Y' }}</label>
         </div>
         {% if request.user != advertisement.author  %}
-            <a class="button-click" href="/advertisements/{{ i.id }}/reply/">
+            <a class="button-click" href="/advertisements/{{ advertisement.id }}/reply/">
                 <input class="responce-button" type="submit" value="Оставить отзыв">
             </a>
         {% endif %}
+        
     </div>
 </div>
 {% endblock content %}

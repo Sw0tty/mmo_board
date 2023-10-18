@@ -16,6 +16,14 @@ h3 {
     text-align: left;
 }
 
+h5 {
+  text-align: left;
+}
+
+.reply-label {
+  text-align: left;
+}
+
 td {
     padding: 10px;
     background-color: whitesmoke;
@@ -136,4 +144,23 @@ hr {
 
 .grad-block {
   box-shadow: -5px 5px 5px 0px rgba(255, 255, 255, 0.2);
+}
+
+.content {
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 15px 0px 15px 0px;
+  justify-content: flex-start;
+  display: flex;
+  min-height: 20em;
+}
+
+.reply-block {
+    background-color: white;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
 }

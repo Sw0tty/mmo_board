@@ -1,5 +1,6 @@
 {% extends 'flatpages/default.html' %}
 {% load static %}
+{% load custom_filters %}
 
 
 {% block title %}
@@ -37,6 +38,9 @@
         </div>
         <div class="info-block">
             <label>Дата публикации: {{ i.datetime_in|date:'d.m.Y' }}</label>
+        </div>
+        <div class="info-block">
+            <label>Отзывы: {{ i.id|get_replies_count }}</label>
         </div>
         {% if request.user != i.author  %}
             <a class="button-click" href="/advertisements/{{ i.id }}/reply/">

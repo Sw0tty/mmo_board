@@ -1,5 +1,6 @@
 {% extends 'flatpages/default.html' %}
 {% load static %}
+{% load custom_filters %}
 
 
 {% block title %}
@@ -12,47 +13,43 @@
 <h1>Ваши объявления</h1>
 <hr>
 
-
 {% if own_advertisements %}
-{% for i in own_advertisements %}
-<div class="cube">
-    <div class="main-info-block">
-        <h3>{{ i.title }}</h3>
-        <hr>
-        <div class="content">
-            <label>{{ i.description }}</label>
+    {% for i in own_advertisements %}
+    <div class="cube">
+        <div class="main-info-block">
+            <h3>{{ i.title }}</h3>
+            <hr>
+            <div class="content">
+                <label>{{ i.description }}</label>
+            </div>
+        </div>
+        <div class="post-info">
+            <div class="info-block">
+                <label>Автор:&nbsp{{ i.author }}</label>
+            </div>
+            <div class="info-block">
+                <label>Тема:&nbsp{{ i.get_category_display }}</label>
+            </div>
+            <div class="info-block">
+                <label>Дата публикации:&nbsp{{ i.datetime_in|date:'d.m.Y' }}</label>
+            </div>
+            <div class="info-block">
+                <label>Отзывы: {{ i.id|get_replies_count:False }}</label>
+            </div>
+            {% if i.id|get_no_adopted_replies_count %}
+                <a class="button-click" href="/">             
+                    <input class="button-alter" type="submit" value="Обработать отзывы">
+                </a>
+            {% endif %}
+            <a class="button-click" href="/advertisements/{{ i.id }}/edit/">
+                <input class="button-alter" type="submit" value="Редактировать">
+            </a>
         </div>
     </div>
-    <div class="post-info">
-        <div class="info-block">
-            <label>Автор:&nbsp{{ i.author }}</label>
-        </div>
-        <div class="info-block">
-            <label>Тема:&nbsp{{ i.get_category_display }}</label>
-        </div>
-        <div class="info-block">
-            <label>Дата публикации:&nbsp{{ i.datetime_in|date:'d.m.Y' }}</label>
-        </div>
-
-
-        
-
-
-        <a class="button-click" href="/advertisements/{{ i.id }}/edit/">
-            <input class="button-alter" type="submit" value="Редактировать">
-        </a>
-    </div>
-</div>
-{% endfor %}
-
-
-
-
-
+    {% endfor %}
 {% else %}
 	<h2>У вас пока нет объявлений</h2>
 {% endif %}
-
 {% if page_obj.has_previous %}
        <a href="?page=1">1</a>
        {% if page_obj.previous_page_number != 1 %}
@@ -68,5 +65,4 @@
            <a href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
        {% endif %}
    {% endif %}
-
 {% endblock content %}

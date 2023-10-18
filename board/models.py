@@ -29,4 +29,4 @@ class Reply(models.Model):
     advertisement_id = models.ForeignKey('Advertisement', on_delete=models.CASCADE)
 
     def get_absolute_url(self):
-        return reverse('advertisement_list')
+        return reverse('reply_added')
