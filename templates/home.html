@@ -6,60 +6,47 @@
 {% endblock title %}
 
 {% block content %}
-<link rel="stylesheet" type='text/css' href="{% static 'css/home-styles.css' %}">
+<link rel="stylesheet" type='text/css' href="{% static 'css/advertisement-style.css' %}">
+
 <style>
     body {
       background: url("/static/assets/main.jpeg") no-repeat fixed;
       background-size: cover;
     }
 </style>
-<!--<div class="sticky"></div>-->
+
 <div class="title-cube">
-<!--    <h1>{{ request.user.is_authenticated }}</h1>-->
-    <h1>Добро пожаловать на новостной портал!</h1>
-</div>
-<!--<section>-->
-<!--    <div class="image-block">-->
-<!--    </div>-->
-<!--    <div class="">-->
-<!--        <h1>Добро пожаловать на новостной портал!</h1>-->
-<!--    </div>-->
-<!--</section>-->
-
-<div class="cube">
-    <h1>Доступные страницы</h1>
-    <ol>
-        <li>Advertisements - страница все объявлений</li>
-        <li>Random new - случайный пост</li>
-        <li>Search - поиск постов по параметрам</li>
-        <li>Create - создание постов</li>
-        <li>For users - страница пользователей</li>
-        <li>Categories - все достпуные категории</li>
-        <li>Admin - панель администратора</li>
-    </ol>
+    <h1>Добро пожаловать на MMO портал!</h1>
 </div>
 
 <div class="cube">
-    <h1>Что нового?</h1>
-    <h3>Добавлены страницы</h3>
-    <hr>
-    <p class="home-text">Categories - все доступные категории.</p>
-    <br>
-    <h3>Внесенные изменения</h3>
-    <hr>
-    <ol>
-        <li>Bar - добавлено поле для перехода к форме авторизации.</li>
-        <li>Все страницы с авторизацией, регистрацией, выхода из аккаунта переопределены для подключения стилей.</li>
-        <li>Переопределена страница ошибки 403</li>
-    </ol>
-    <br>
-    <h3>Краткое описание новых возможностей</h3>
-    <hr>
-    <ol>
-        <li>При переходе для авторизации можно либо
-        зарегистрироваться, либо войти через свой акаунт Google или GitHub.</li>
-        <li>Create - страница выбора опредленного типа поста. После выбора переносит на создание поста.</li>
-        <li>Кнопки редактирования - при нажатии открывают выбранный пост в режиме редактирования. Тамже можно удалить пост.</li>
-    </ol>
+    <div class="main-info-block">
+        <h1>Общедоступные страницы</h1>
+        <hr>
+        <ol>
+            <li>Advertisements - страница всех объявлений</li>
+            <li>Random advertisement - случайный пост</li>
+            <li>Admin - переход в панель администратора</li>
+        </ol>
+    </div>
+</div>
+
+<div class="cube">
+    <div class="main-info-block">
+        <h1>Для авторизированных пользователей</h1>
+        <hr>
+        <ol>
+            <li>Advertisement manager - менеджер объявлений</li>
+                <ul>
+                    Own publications - собственные публикации
+                </ul>
+                <ul>
+                    Create - создание публикации
+                </ul>
+            <li>Prodile - страница профиля</li>
+            <li>Возможность оставлять отклики</li>
+            <li>Обрабатывать отклики под своими постами (переход в данный раздел осуществляется на странице Own publications)</li>
+        </ol>
+    </div>
 </div>
 {% endblock content %}

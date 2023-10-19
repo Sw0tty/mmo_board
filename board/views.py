@@ -95,17 +95,16 @@ class Replies(DetailView):
 
 
 @login_required
-def accept_reply(request, *callback_args, **callback_kwargs):
-    request.path = request.path[:-1]
-    reply = Reply.objects.get(id=request.path[request.path.rfind('/') + 1:])
+def accept_reply(request, pk):
+    reply = Reply.objects.get(id=pk)
     reply.adopted = True
     reply.save()
+    reply.send_accepted_email()
     return redirect(f'/advertisements/own/{reply.advertisement_id.id}/')
 
 
 @login_required
-def reject_reply(request, *callback_args, **callback_kwargs):
-    request.path = request.path[:-1]
-    reply = Reply.objects.get(id=request.path[request.path.rfind('/') + 1:])
+def reject_reply(request, pk):
+    reply = Reply.objects.get(id=pk)
     reply.delete()
     return redirect(f'/advertisements/own/{reply.advertisement_id.id}/')

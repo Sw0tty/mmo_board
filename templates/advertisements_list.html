@@ -23,7 +23,11 @@
 {% for i in advertisements %}
 <div class="cube">
     <div class="main-info-block">
-        <h3>{{ i.title }}</h3>
+        <div class="title-block">
+            <a class="post-title" href="{{ i.id }}/">
+                <label>{{ i.title }}</label>
+            </a>
+        </div>
         <hr>
         <div class="content">
             <label>{{ i.description }}</label>
@@ -43,7 +47,7 @@
             <label>Отзывы: {{ i.id|get_replies_count }}</label>
         </div>
         {% if request.user != i.author  %}
-            <a class="button-click" href="/advertisements/{{ i.id }}/reply/">
+            <a class="button-click" href="{{ i.id }}/reply/">
                 <input class="responce-button" type="submit" value="Оставить отзыв">
             </a>
         {% endif %}

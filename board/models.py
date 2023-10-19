@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
+from django.core.mail import send_mail
+from mmo_board.settings import DEFAULT_FROM_EMAIL
 
 from board.resources import advertisement_type
 
@@ -30,3 +32,17 @@ class Reply(models.Model):
 
     def get_absolute_url(self):
         return reverse('reply_added')
+    
+    def send_notification_email(self):
+        subject = "На ваше объявление поступил новый отклик"
+        message = f'Здравствуйте!\n\nНа ваше объявление "{Advertisement.objects.get(id=self.advertisement_id).title[:15]}" появился новый отклик.'
+        from_email = DEFAULT_FROM_EMAIL
+        recipient_list = [Advertisement.objects.get(id=self.advertisement_id).author]
+        return send_mail(subject, message, from_email, recipient_list)
+
+    def send_accepted_email(self):
+        subject = 'Ваш отклик принят'
+        message = f'Здравствуйте!\n\nВаш отклик "{self.description[:15]}" принят.'
+        from_email = DEFAULT_FROM_EMAIL
+        recipient_list = [self.author.email]
+        return send_mail(subject, message, from_email, recipient_list)
